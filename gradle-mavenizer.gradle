@@ -1,0 +1,48 @@
+apply plugin: 'maven-publish'
+
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/artifact-javadoc-handler.gradle'
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/artifact-pom-manager.gradle'
+apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/utils.gradle'
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            mavenPublish(MavenPublication) {
+                if (isAndroidProject()) {
+                    artifact bundleReleaseAar
+                    artifact androidJavadocsJar
+                    artifact androidSourcesJar
+                } else {
+                    artifact jar
+                    artifact sourcesJar
+                    artifact javadocJar
+                }
+                
+                decoratePom(pom)
+            }
+        }
+        
+        repositories {
+            maven {
+                def isToRemoteRepo = getBooleanProperty("mavPublishToRemoteRepo")
+                if (isToRemoteRepo) {
+                    credentials {
+                        username getStringProperty("mavRemoteRepoUser")
+                        password getStringProperty("mavRemoteRepoPassword")
+                    }
+                    url = getStringProperty("mavRepoRemoteUrl")
+                }
+
+                def isToInternalRepo = getBooleanProperty("mavPublishToInternalRepo")
+                if (isToInternalRepo) {
+                    url = getStringProperty("mavRepoInternalUrl")
+                }
+
+                def isToMavenLocal = getBooleanProperty("mavPublishToMavenLocal")
+                if (isToMavenLocal || (!isToInternalRepo && !isToRemoteRepo)) {
+                    mavenLocal()
+                }
+            }
+        }
+    }
+}
