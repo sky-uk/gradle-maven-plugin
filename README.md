@@ -1,4 +1,4 @@
-# GradleMavenizer
+# Gradle Maven Plugin
 This is a small "plugin" to simplify the use of *maven-publish* Gradle plugin. 
 You can use this plugin for Java Library and Android Library.
 
