@@ -33,7 +33,7 @@ Congratulations on contributing a fix! We love receiving new bug fixes and your 
 
 ### Improvements
 
-If you think you can Gradle Maven Plugin, create a new issue and explain with as much as details as possible, how your idea can improve the way we write an API, highlighting the advantages over the current approach and eventual tradeoffs. Discussing the matter via an issue is a preferred starting point. This will allow other contributors to join and express their point of view, allowing for a smooth glide from problem description to resolution.
+If you think you can Gradle Maven Plugin, create a new issue and explain with as much as details as possible. Discussing the matter via an issue is a preferred starting point. This will allow other contributors to join and express their point of view, allowing for a smooth glide from problem description to resolution.
 
 We take performance very much to heart. Gradle Maven Plugin is at the core of some large products. Performance improvements are always welcome! If you identified a bottleneck, please make sure you follow the performance fix procedure:
 
@@ -47,7 +47,7 @@ Thanks for caring about performance! Gradle Maven Plugin is a crucial component 
 
 ### Documentation
 
-Gradle Maven Plugin is a networking library. Networking programming in general is a lot about explaining the concepts, standards, linking to specific RFCs and caring about doing things in a standardized way, caring to not reinvent the wheel. This requires knowledge that's not in a single place, so links are more than welcome. If you spotted a place where documentation could be improved (be in it-line documentation of project markdown pages), please feel free to submit a documentation improvement PR. We very much need a documentation that is as good, as as up-to-date as possible!
+If you spotted a place where documentation could be improved (be in it-line documentation of project markdown pages), please feel free to submit a documentation improvement PR. We very much need a documentation that is as good, as as up-to-date as possible!
 
 We understand the need for foreign language documentation. Unfortunately, due to the scope and breadth of the project it's a tough promise to keep up-to-date documentation in other languages than English. Moreover, all contributors only have English as a common language on the project. Therefore, and to keep the project as maintainable as possible, we only accept documentation changes and improvements provided in English. If you're looking at providing a translation of the in-line documentation, please make sure you have the resources and time to keep it updated as the framework changes. We care a lot about the quality of both the code and its documentation, over the long term. Maintaining a foreign language translation is a longtime commitment that should not be taken lightly.
 
