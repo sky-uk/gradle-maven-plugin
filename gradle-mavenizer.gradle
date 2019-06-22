@@ -1,8 +1,10 @@
 apply plugin: 'maven-publish'
 
-apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/artifact-javadoc-handler.gradle'
-apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/artifact-pom-manager.gradle'
-apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/utils.gradle'
+githubCommitIdentifier = project.hasProperty('mavPluginVersion') ? project.mavPluginVersion : 'master'
+
+apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${githubCommitIdentifier}/artifact-javadoc-handler.gradle"
+apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${githubCommitIdentifier}/artifact-pom-manager.gradle"
+apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${githubCommitIdentifier}/utils.gradle"
 
 project.afterEvaluate {
     publishing {
