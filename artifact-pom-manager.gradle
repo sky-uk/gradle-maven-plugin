@@ -49,8 +49,9 @@ def addDependencies(pom) {
                 exclusionNode.appendNode('groupId', '*')
             } else if (!dep.properties.excludeRules.empty) {
                 // Otherwise add specified exclude rules
-                final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+                final exclusionsNode = dependencyNode.appendNode('exclusions')
                 dep.properties.excludeRules.each { ExcludeRule rule ->
+                    final exclusionNode = exclusionsNode.appendNode('exclusion')
                     exclusionNode.appendNode('artifactId', rule.module ?: '*')
                     exclusionNode.appendNode('groupId', rule.group ?: '*')
                 }

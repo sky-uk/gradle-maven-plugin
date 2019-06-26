@@ -9,7 +9,7 @@ if (isAndroidProject()) {
 
         android.libraryVariants.all { variant ->
             if (variant.name == 'release') {
-                owner.classpath += variant.javaCompile.classpath
+                owner.classpath += variant.javaCompileProvider.get().classpath
             }
         }
 

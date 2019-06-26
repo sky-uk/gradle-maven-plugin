@@ -10,6 +10,7 @@ You can use this plugin for Java Library and Android Library.
     * [Repositories](#repositories)
     * [Example of per-module costumization](#examplePerModule)
 * [Library Publish](#publishCommand)
+* [Generate POM file](#pomGeneration)
 
 ## <a name="usage"/>Usage
 In order to use GradleMavenizer you have to add the line
@@ -73,3 +74,10 @@ To finally publish you library you can use the command `./gradlew publish` direc
 
 You can also pass some properties directly from command line using the command `-P` (every property must have `-P` before), for example:
 `./gradlew publish -PmavPublishToMavenLocal=true`
+
+## <a name="pomGeneration"/>Generate POM file
+If you want to generate the POM file without publish your library you can use the command `./gradlew generatePomFileForMavenPublishPublication` directly from your project root folder.
+
+To generate the POM file only for one module of your library you can use the command `./gradlew your-module-name:generatePomFileForMavenPublishPublication` where you have to replace `your-module-name` with the name you chose for your module.
+
+_Note: POM file will be saved in `build/publications/mavenPublish/` as `pom-default.xml`_
