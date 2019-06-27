@@ -23,25 +23,28 @@ project.afterEvaluate {
         }
         
         repositories {
-            maven {
-                def isToRemoteRepo = getBooleanProperty("mavPublishToRemoteRepo")
-                if (isToRemoteRepo) {
+            def isToRemoteRepo = getBooleanProperty("mavPublishToRemoteRepo")
+            def isToInternalRepo = getBooleanProperty("mavPublishToInternalRepo")
+            def isToMavenLocal = getBooleanProperty("mavPublishToMavenLocal")
+
+            if (isToRemoteRepo) {
+                maven {
                     credentials {
                         username getStringProperty("mavRemoteRepoUser")
                         password getStringProperty("mavRemoteRepoPassword")
                     }
                     url = getStringProperty("mavRepoRemoteUrl")
                 }
+            }
 
-                def isToInternalRepo = getBooleanProperty("mavPublishToInternalRepo")
-                if (isToInternalRepo) {
+            if (isToInternalRepo) {
+                maven {
                     url = getStringProperty("mavRepoInternalUrl")
                 }
+            }
 
-                def isToMavenLocal = getBooleanProperty("mavPublishToMavenLocal")
-                if (isToMavenLocal || (!isToInternalRepo && !isToRemoteRepo)) {
-                    mavenLocal()
-                }
+            if (isToMavenLocal || (!isToInternalRepo && !isToRemoteRepo)) {
+                mavenLocal()
             }
         }
     }
