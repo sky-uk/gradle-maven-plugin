@@ -18,7 +18,17 @@ project.afterEvaluate {
                     artifact sourcesJar
                     artifact javadocJar
                 }
-                
+
+                if(project.hasProperty('groupId')) {
+                    groupId = project.getProperty('groupId')
+                }
+                if(project.hasProperty('artifactId')) {
+                    artifactId = project.getProperty('artifactId')
+                }
+                if(project.hasProperty('versionId')) {
+                    version = project.getProperty('versionId')
+                }
+
                 decoratePom(pom)
             }
         }

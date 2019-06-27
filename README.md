@@ -8,6 +8,7 @@ You can use this plugin for Java Library and Android Library.
 * [Customization](#customization)
     * [Generic Project Info](#genericInfo)
     * [Repositories](#repositories)
+    * [Modules](#modules)
     * [Example of per-module costumization](#examplePerModule)
 * [Library Publish](#publishCommand)
 * [Generate POM file](#pomGeneration)
@@ -20,7 +21,7 @@ In order to use GradleMavenizer you have to add the line
 at the <b>very bottom</b> of the *build.gradle* file. Alternatively, to use a specific release version, add this property to the project (see Releases at the top of the Github page for released versions):
 
     mavPluginVersion = '1.0.3'
-    
+
 and add this line to the very bottom of the *build.gradle* file:
 
     apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${project.mavPluginVersion}/gradle-mavenizer.gradle"`
@@ -56,7 +57,23 @@ _<b>Attention:</b> If you add the same property to the root project file and to 
 * MavenLocal repository:
     * <b>mavPublishToMavenLocal</b> _-> Boolean property -> Allow the script to load your library to MavenLocal folder_
     
+
 _<b>Attention:</b> If you won't set any repository automatically the script will use MavenLocal as default repo_
+
+### <a name="modules" /> 3. Modules
+
+For each individual module, we can set different `groupId`, `artifactId` and `version` attrubitons in it's build.gradle file.
+
+```gradle
+ext {
+    groupId = 'uk.sky.plugin'
+    artifactId = 'gradle-maven-plugin'
+    versionId = '1.0.4@aar'
+}
+```
+
+
+
 
 ### <a name="examplePerModule"/>Example of per-module _build.gradle_ costumization
 
