@@ -17,7 +17,13 @@ In order to use GradleMavenizer you have to add the line
 
 `apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/gradle-mavenizer.gradle'`
 
-at the <b>very bottom</b> of the *build.gradle* file.
+at the <b>very bottom</b> of the *build.gradle* file. Alternatively, to use a specific release version, add this property to the project (see Releases at the top of the Github page for released versions):
+
+    mavPluginVersion = '1.0.2'
+    
+and add this line to the very bottom of the *build.gradle* file:
+
+    apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${project.mavPluginVersion}/gradle-mavenizer.gradle"`
 
 ## <a name="customization"/>Customization
 GradleMavenizer is highly customizable.
