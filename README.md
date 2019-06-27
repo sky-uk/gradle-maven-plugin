@@ -19,7 +19,7 @@ In order to use GradleMavenizer you have to add the line
 
 at the <b>very bottom</b> of the *build.gradle* file. Alternatively, to use a specific release version, add this property to the project (see Releases at the top of the Github page for released versions):
 
-    mavPluginVersion = '1.0.2'
+    mavPluginVersion = '1.0.3'
     
 and add this line to the very bottom of the *build.gradle* file:
 
@@ -36,7 +36,6 @@ _<b>Attention:</b> If you add the same property to the root project file and to 
 
 * <b>mavProjectName</b> _-> String property -> Identify the project name (can be different from the artifactId)_
 * <b>mavLibraryDescription</b> _-> String property -> A simple description for the library_
-* <b>mavVersion</b> _-> String property -> The version of the library_
 * <b>mavDevelopers</b> _-> Map property -> A map with the ids and the developer name of the library_
 * <b>mavLibraryLicenses</b> _-> Map property -> A map with the name and the urls of the library licenses_
 * <b>mavSiteUrl</b> _-> String property -> Identify the url of the project website_
@@ -71,7 +70,6 @@ project.ext {
     mavRepoInternalUrl = "path/to/internal/repo"
     mavLibraryLicenses = ["Apache-2.0":'http://www.apache.org/licenses/LICENSE-2.0.txt']
     mavLibraryDescription = "A simple description of the project"
-    mavVersion = "1.0"
 }
 ```
 
