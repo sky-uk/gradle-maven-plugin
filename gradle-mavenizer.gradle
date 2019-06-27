@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 
-githubCommitIdentifier = project.hasProperty('mavPluginVersion') ? project.mavPluginVersion : 'master'
+def githubCommitIdentifier = project.hasProperty('mavPluginVersion') ? project.mavPluginVersion : 'master'
 
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${githubCommitIdentifier}/artifact-javadoc-handler.gradle"
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${githubCommitIdentifier}/artifact-pom-manager.gradle"
