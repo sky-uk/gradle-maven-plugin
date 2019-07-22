@@ -37,28 +37,44 @@ def addDependencies(pom) {
             if (dep.group == null || dep.version == null || dep.name == null || dep.name == "unspecified")
                 return // ignore invalid dependencies
             
-            final dependencyNode = dependenciesNode.appendNode('dependency')
-            dependencyNode.appendNode('groupId', dep.group)
-            dependencyNode.appendNode('artifactId', dep.name)
-            dependencyNode.appendNode('version', dep.version)
-            dependencyNode.appendNode('scope', scope)
-            if (!dep.transitive) {
-                // If this dependency is transitive, we should force exclude all its dependencies them from the POM
-                final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
-                exclusionNode.appendNode('artifactId', '*')
-                exclusionNode.appendNode('groupId', '*')
-            } else if (!dep.properties.excludeRules.empty) {
-                // Otherwise add specified exclude rules
-                final exclusionsNode = dependencyNode.appendNode('exclusions')
-                dep.properties.excludeRules.each { ExcludeRule rule ->
-                    final exclusionNode = exclusionsNode.appendNode('exclusion')
-                    exclusionNode.appendNode('artifactId', rule.module ?: '*')
-                    exclusionNode.appendNode('groupId', rule.group ?: '*')
+            if (dep.artifacts.size() > 0) {
+                dep.artifacts.each { art ->
+                    addDependencyNode(dependenciesNode, dep, scope, art.classifier)
                 }
+            } else {
+                addDependencyNode(dependenciesNode, dep, scope, null)
             }
         }
         manageConfigurations(configurations)
     }
+}
+
+def addDependencyNode(dependenciesNode, dep, scope, classifier) {
+    final dependencyNode = dependenciesNode.appendNode('dependency')
+    dependencyNode.appendNode('groupId', dep.group)
+    dependencyNode.appendNode('artifactId', dep.name)
+    dependencyNode.appendNode('version', dep.version)
+
+    if (classifier != null) {
+        dependencyNode.appendNode('classifier', classifier)
+    }
+
+    dependencyNode.appendNode('scope', scope)
+    
+    if (!dep.transitive) {
+        // If this dependency is transitive, we should force exclude all its dependencies them from the POM
+        final exclusionNode = dependencyNode.appendNode('exclusions').appendNode('exclusion')
+        exclusionNode.appendNode('artifactId', '*')
+        exclusionNode.appendNode('groupId', '*')
+    } else if (!dep.properties.excludeRules.empty) {
+        // Otherwise add specified exclude rules
+        final exclusionsNode = dependencyNode.appendNode('exclusions')
+        dep.properties.excludeRules.each { ExcludeRule rule ->
+            final exclusionNode = exclusionsNode.appendNode('exclusion')
+            exclusionNode.appendNode('artifactId', rule.module ?: '*')
+             exclusionNode.appendNode('groupId', rule.group ?: '*')
+        }
+    }   
 }
 
 def manageConfigurations(configurations) {
