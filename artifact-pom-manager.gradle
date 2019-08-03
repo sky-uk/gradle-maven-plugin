@@ -1,4 +1,5 @@
-apply from: 'https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/master/utils.gradle'
+def gradlePluginVersion = project.hasProperty('mavPluginVersion') ? project.mavPluginVersion : 'master'
+apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${gradlePluginVersion}/utils.gradle"
  
 def decoratePom(pom) {
     pom.name = getStringProperty("mavProjectName")
@@ -58,11 +59,11 @@ def addDependencyNode(dependenciesNode, dep, scope, classifier, extension) {
     if (classifier != null) {
         dependencyNode.appendNode('classifier', classifier)
     }
-
+    
     if (extension != null) {
         dependencyNode.appendNode('type', extension)
     }
-
+    
     dependencyNode.appendNode('scope', scope)
     
     if (!dep.transitive) {
