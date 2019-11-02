@@ -8,21 +8,25 @@ apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${grad
 project.afterEvaluate {
     publishing {
         publications {
-            mavenPublish(MavenPublication) {
-                if (isAndroidProject()) {
-                    artifact bundleReleaseAar
-                    artifact androidJavadocsJar
-                    artifact androidSourcesJar
-                } else {
+            if (isAndroidProject()) {
+                android.libraryVariants.all { variant ->
+                    "maven${variant.name.capitalize()}Publish"(MavenPublication) {
+                        artifact project.tasks.findByName("bundle${variant.name.capitalize()}Aar")
+                        artifact androidJavadocsJar
+                        artifact androidSourcesJar
+                    }
+                }
+            } else {
+                mavenPublish(MavenPublication) {
                     artifact jar
                     artifact sourcesJar
                     artifact javadocJar
                 }
-                
+
                 decoratePom(pom)
             }
         }
-        
+
         repositories {
             def isToRemoteRepo = getBooleanProperty("mavPublishToRemoteRepo")
             def isToInternalRepo = getBooleanProperty("mavPublishToInternalRepo")
