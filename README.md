@@ -36,7 +36,7 @@ _<b>Attention:</b> If you add the same property to the root project file and to 
 
 * <b>mavProjectName</b> _-> String property -> Identify the project name (can be different from the artifactId)_
 * <b>mavLibraryDescription</b> _-> String property -> A simple description for the library_
-* <b>mavDevelopers</b> _-> Map property -> A map with the ids and the developer name of the library_
+* <b>mavDevelopers</b> _-> Map property -> A map with the ids, name, and the developer email of the library_
 * <b>mavLibraryLicenses</b> _-> Map property -> A map with the name and the urls of the library licenses_
 * <b>mavSiteUrl</b> _-> String property -> Identify the url of the project website_
 * <b>mavGitUrl</b> _-> String property ->Identify the url of the project github page_
@@ -62,7 +62,7 @@ _<b>Attention:</b> If you won't set any repository automatically the script will
 
 ```
 project.ext {
-    mavDevelopers = ["Fe":"Federico"]
+    mavDevelopers = ["Fe":["Federico", "frederico@gmail.com"]]
     mavSiteUrl = "https://github.com/sky-uk/gradle-maven-plugin"
     mavGitUrl = mavSiteUrl + '.git'
     mavProjectName = 'GradleMavenizer'
@@ -72,6 +72,10 @@ project.ext {
     mavLibraryDescription = "A simple description of the project"
 }
 ```
+
+It is possible to add more developers, example:
+    
+    mavDevelopers = ["userId1":["User 1", "user1@gmail.com"],["userId2":["User 2", "user2@gmail.com"]]
 
 ## <a name="publishCommand"/>Library Publish
 To finally publish you library you can use the command `./gradlew publish` directly from your project root folder.

@@ -15,10 +15,12 @@ def decoratePom(pom) {
         }
     }
     pom.developers {
-        getArrayProperty("mavDevelopers").each { developerId, developerName ->
+        getArrayProperty("mavDevelopers").each { developerId, developerNameAndEmail ->
             developer {
                 id = developerId
-                name = developerName
+                name = developerNameAndEmail.get(0)
+                email = developerNameAndEmail.get(1)
+
             }
         }
     }
