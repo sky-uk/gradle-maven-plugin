@@ -49,6 +49,12 @@ _<b>Attention:</b> If you add the same property to the root project file and to 
     * <b>mavRemoteRepoPassword</b> _-> String property -> Password to grant access to the remote repo_
     * <b>mavRepoRemoteUrl</b> _-> String property -> Identify the url of the remote repo_
     
+* Github Packages:
+    * <b>mavPublishToGithubPackages</b> _-> Boolean property -> Allow the script to load your library to a Github Packages_
+    * <b>mavGithubPackagesUser</b> _-> String property -> Your Github username_
+    * <b>mavGithubPackagesToken</b> _-> String property -> Token to grant access to the Github Packages_
+    * <b>mavGithubPackagesUrl</b> _-> String property -> Identify the url of the Github Packages_
+    
 * Internal repository:
     * <b>mavPublishToInternalRepo</b> _-> Boolean property -> Allow the script to load your library to an internal repo_
     * <b>mavRepoInternalUrl</b> _-> String property -> Identify the url of the internal repo_
