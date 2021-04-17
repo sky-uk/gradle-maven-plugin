@@ -35,9 +35,9 @@ project.afterEvaluate {
                     artifact sourcesJar
                     artifact javadocJar
                 }
-
-                decoratePom(pom)
             }
+
+            decoratePom(pom)
         }
 
         repositories {
