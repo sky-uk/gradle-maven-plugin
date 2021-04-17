@@ -23,22 +23,17 @@ if (secretPropsFile.exists()) {
 project.afterEvaluate {
     publishing {
         publications {
-            if (project.plugins.findPlugin("com.android.library")) {
-                mavenPublish(MavenPublication) {
-                    from components.release
+            mavenPublish(MavenPublication) {
+                if (project.plugins.findPlugin("com.android.library")) {
+                    artifact bundleReleaseAar
                     artifact androidJavadocsJar
                     artifact androidSourcesJar
-
-                    decoratePom(pom)
-                }
-            } else {
-                mavenPublish(MavenPublication) {
+                } else {
                     artifact jar
                     artifact sourcesJar
                     artifact javadocJar
-
-                    decoratePom(pom)
                 }
+                decoratePom(pom)
             }
         }
 
