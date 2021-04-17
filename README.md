@@ -10,6 +10,7 @@ You can use this plugin for Java Library and Android Library.
     * [Repositories](#repositories)
     * [Example of per-module costumization](#examplePerModule)
 * [Library Publish](#publishCommand)
+* [Maven Central Publish](#maven-central-publish)
 * [Generate POM file](#pomGeneration)
 
 ## <a name="usage"/>Usage
