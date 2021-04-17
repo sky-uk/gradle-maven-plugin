@@ -20,7 +20,7 @@ In order to use GradleMavenizer you have to add the line
 
 at the <b>very bottom</b> of the *build.gradle* file. Alternatively, to use a specific release version, add this property to the project (see Releases at the top of the Github page for released versions):
 
-    mavPluginVersion = '1.0.3'
+    mavPluginVersion = '1.2.0'
     
 and add this line to the very bottom of the *build.gradle* file:
 
