@@ -25,7 +25,7 @@ project.afterEvaluate {
         publications {
             mavenPublish(MavenPublication) {
                 if (project.plugins.findPlugin("com.android.library")) {
-                    from components.release
+                    artifact bundleReleaseAar
                     artifact androidJavadocsJar
                     artifact androidSourcesJar
                 } else {
