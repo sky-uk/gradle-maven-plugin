@@ -79,6 +79,28 @@ To finally publish you library you can use the command `./gradlew publish` direc
 You can also pass some properties directly from command line using the command `-P` (every property must have `-P` before), for example:
 `./gradlew publish -PmavPublishToMavenLocal=true`
 
+## <a name="publishCommand"/>Maven Central Publish
+Follow [this guide](https://getstream.io/blog/publishing-libraries-to-mavencentral-2021/?s=09) if you need to get a Sonatype account and generate a GPG key. Those matters are out of scope here.
+
+In your project root, add `local.properties` (make sure to ignore it in your repo and not commit it) with the following content:
+```groovy
+signing.keyId=ABCDEFGH
+signing.password=yourPassword
+signing.secretKeyRingFile=/path/to/ABCDEFGH.gpg
+
+mavRepoRemoteUrl=https://oss.sonatype.org/service/local/staging/deploy/maven2/
+mavRemoteRepoUser=yourSonatypeUsername
+mavRemoteRepoPassword=yourSonatypePassword
+```
+Then to publish a staging repository on [Maven Central](https://oss.sonatype.org) execute:
+
+```
+./gradlew publish -PmavSigning=true -PmavPublishToRemoteRepo=true --max-workers 1
+```
+The `--max-workers 1` setting is important to ensure the publication does not get split in multiple publications when using gradle parallel builds, resulting in many stagng repositories on sonatype. It's always advised to specify it.
+
+After you executed the command, you can browse and review what's been uploaded by visiting https://oss.sonatype.org/#stagingRepositories
+
 ## <a name="pomGeneration"/>Generate POM file
 If you want to generate the POM file without publish your library you can use the command `./gradlew generatePomFileForMavenPublishPublication` directly from your project root folder.
 

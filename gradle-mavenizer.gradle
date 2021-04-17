@@ -1,28 +1,38 @@
 apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 def gradlePluginVersion = project.hasProperty('mavPluginVersion') ? project.mavPluginVersion : 'master'
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${gradlePluginVersion}/utils.gradle"
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${gradlePluginVersion}/artifact-javadoc-handler.gradle"
 apply from: "https://raw.githubusercontent.com/sky-uk/gradle-maven-plugin/${gradlePluginVersion}/artifact-pom-manager.gradle"
 
+File secretPropsFile = project.rootProject.file('local.properties')
+
+if (secretPropsFile.exists()) {
+    Properties p = new Properties()
+    p.load(new FileInputStream(secretPropsFile))
+    p.each { name, value ->
+        project.ext[name] = value
+    }
+} else {
+    project.ext["signing.keyId"] = System.getenv('SIGNING_KEY_ID')
+    project.ext["signing.password"] = System.getenv('SIGNING_PASSWORD')
+    project.ext["signing.secretKeyRingFile"] = System.getenv('SIGNING_SECRET_KEY_RING_FILE')
+}
+
 project.afterEvaluate {
     publishing {
         publications {
-            if (isAndroidProject()) {
-                android.libraryVariants.all { variant ->
-                    "maven${variant.name.capitalize()}Publish"(MavenPublication) {
-                        artifact project.tasks.findByName("bundle${variant.name.capitalize()}Aar")
-                        artifact androidJavadocsJar
-                        artifact androidSourcesJar
-                    }
-                }
-            } else {
-                mavenPublish(MavenPublication) {
+            mavenPublish(MavenPublication) {
+                if (project.plugins.findPlugin("com.android.library")) {
+                    artifact bundleReleaseAar
+                    artifact androidJavadocsJar
+                    artifact androidSourcesJar
+                } else {
                     artifact jar
                     artifact sourcesJar
                     artifact javadocJar
                 }
-
                 decoratePom(pom)
             }
         }
@@ -51,6 +61,12 @@ project.afterEvaluate {
             if (isToMavenLocal || (!isToInternalRepo && !isToRemoteRepo)) {
                 mavenLocal()
             }
+        }
+    }
+
+    if (getBooleanProperty("mavSigning")) {
+        signing {
+            sign publishing.publications
         }
     }
 }
