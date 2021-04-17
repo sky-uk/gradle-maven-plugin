@@ -80,7 +80,7 @@ You can also pass some properties directly from command line using the command `
 `./gradlew publish -PmavPublishToMavenLocal=true`
 
 ## <a name="publishCommand"/>Maven Central Publish
-Follow [this guide](https://getstream.io/blog/publishing-libraries-to-mavencentral-2021/?s=09) if you need to get a Sonatype account and generate a GPG key. That matters are out of scope here.
+Follow [this guide](https://getstream.io/blog/publishing-libraries-to-mavencentral-2021/?s=09) if you need to get a Sonatype account and generate a GPG key. Those matters are out of scope here.
 
 In your project root, add `local.properties` (make sure to ignore it in your repo and not commit it) with the following content:
 ```groovy
