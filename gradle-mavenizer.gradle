@@ -28,16 +28,18 @@ project.afterEvaluate {
                     from components.release
                     artifact androidJavadocsJar
                     artifact androidSourcesJar
+
+                    decoratePom(pom)
                 }
             } else {
                 mavenPublish(MavenPublication) {
                     artifact jar
                     artifact sourcesJar
                     artifact javadocJar
+
+                    decoratePom(pom)
                 }
             }
-
-            decoratePom(pom)
         }
 
         repositories {
