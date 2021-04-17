@@ -95,8 +95,11 @@ mavRemoteRepoPassword=yourSonatypePassword
 Then to publish a staging repository on [Maven Central](https://oss.sonatype.org) execute:
 
 ```
-./gradlew publish -PmavSigning=true -PmavPublishToRemoteRepo=true
+./gradlew publish -PmavSigning=true -PmavPublishToRemoteRepo=true --max-workers 1
 ```
+The `--max-workers 1` setting is important to ensure the publication does not get split in multiple publications when using gradle parallel builds, resulting in many stagng repositories on sonatype. It's always advised to specify it.
+
+After you executed the command, you can browse and review what's been uploaded by visiting https://oss.sonatype.org/#stagingRepositories
 
 ## <a name="pomGeneration"/>Generate POM file
 If you want to generate the POM file without publish your library you can use the command `./gradlew generatePomFileForMavenPublishPublication` directly from your project root folder.
