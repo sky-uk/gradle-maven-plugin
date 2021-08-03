@@ -82,12 +82,20 @@ def addDependencyNode(dependenciesNode, dep, scope, classifier, extension) {
     }
 }
 
-def manageConfigurations(configurations) {
-    configurations.compile.getDependencies().each { dep -> addDependency(dep, "compile") }
-    configurations.api.getDependencies().each { dep -> addDependency(dep, "compile") }
+def manageConfigurations(configurations) {  
+    try {
+        configurations.compile.getDependencies().each { dep -> addDependency(dep, "compile") }
+        configurations.api.getDependencies().each { dep -> addDependency(dep, "compile") }
+    } catch(Exception e){
+        configurations.api.getDependencies().each { dep -> addDependency(dep, "implementation") }
+    }
+    
     configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
     configurations.testImplementation.getDependencies().each { dep -> addDependency(dep, "test") }
-    configurations.testCompile.getDependencies().each { dep -> addDependency(dep, "test") }
+
+    try {
+        configurations.testCompile.getDependencies().each { dep -> addDependency(dep, "test") }
+    } catch(Exception e){}
 
     if (!isAndroidProject()) {
         configurations.runtime.getDependencies().each { dep -> addDependency(dep, "runtime") }
