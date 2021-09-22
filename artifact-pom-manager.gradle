@@ -83,8 +83,8 @@ def addDependencyNode(dependenciesNode, dep, scope, classifier, extension) {
 }
 
 def manageConfigurations(configurations) {
-    configurations.compile.getDependencies().each { dep -> addDependency(dep, "compile") }
-    configurations.api.getDependencies().each { dep -> addDependency(dep, "compile") }
+    configurations.compile.getDependencies().each { dep -> addDependency(dep, "implementation") }
+    configurations.api.getDependencies().each { dep -> addDependency(dep, "implementation") }
     configurations.implementation.getDependencies().each { dep -> addDependency(dep, "runtime") }
     configurations.testImplementation.getDependencies().each { dep -> addDependency(dep, "test") }
     configurations.testCompile.getDependencies().each { dep -> addDependency(dep, "test") }
