@@ -95,7 +95,7 @@ def manageConfigurations(configurations) {
         }
         try {
             configurations.testRuntime.getDependencies().each { dep -> addDependency(dep, "test") }
-        } ctach (Exception ex) {
+        } catch (Exception ex) {
             configurations.testRuntimeClasspath.getDependencies().each { dep -> addDependency(dep, "test") }
         }
     }
