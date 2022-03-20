@@ -88,7 +88,11 @@ def manageConfigurations(configurations) {
     configurations.testImplementation.getDependencies().each { dep -> addDependency(dep, "test") }
     
     if (!isAndroidProject()) {
-        configurations.runtime.getDependencies().each { dep -> addDependency(dep, "runtime") }
+        try {
+            configurations.runtime.getDependencies().each { dep -> addDependency(dep, "runtime") }
+        } catch (Exception ex) {
+            configurations.runtimeClasspath.getDependencies().each { dep -> addDependency(dep, "runtime") }
+        }
         configurations.testRuntime.getDependencies().each { dep -> addDependency(dep, "test") }
     }
 }
