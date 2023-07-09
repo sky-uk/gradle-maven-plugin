@@ -40,7 +40,7 @@ def addDependencies(pom) {
 
             if (dep.artifacts.size() > 0) {
                 dep.artifacts.each { art ->
-                    addDependencyNode(dependenciesNode, dep, scope, art.classifier, art.extension)
+                    addDependencyNode(dependenciesNode, dep, scope, art.archiveClassifier, art.extension)
                 }
             } else {
                 addDependencyNode(dependenciesNode, dep, scope, null, null)
@@ -50,14 +50,14 @@ def addDependencies(pom) {
     }
 }
 
-def addDependencyNode(dependenciesNode, dep, scope, classifier, extension) {
+def addDependencyNode(dependenciesNode, dep, scope, archiveClassifier, extension) {
     final dependencyNode = dependenciesNode.appendNode('dependency')
     dependencyNode.appendNode('groupId', dep.group)
     dependencyNode.appendNode('artifactId', dep.name)
     dependencyNode.appendNode('version', dep.version)
 
-    if (classifier != null) {
-        dependencyNode.appendNode('classifier', classifier)
+    if (archiveClassifier != null) {
+        dependencyNode.appendNode('archiveClassifier', archiveClassifier)
     }
 
     if (extension != null) {
